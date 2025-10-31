@@ -6,6 +6,7 @@
     <title>WebGIS Pemetaan Aset Bangunan UIM</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     <style>
+        /* CSS Anda yang sudah ada */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
         
@@ -441,7 +442,7 @@
                 </div>
                 <button type="submit" class="btn">🔐 Login</button>
                 <p style="margin-top: 15px; text-align: center; font-size: 12px; color: #999;">
-                    Demo: admin/admin123 atau user/user123
+                    Demo: **admin/admin123** atau **user/user123**
                 </p>
             </form>
         </div>
@@ -516,7 +517,7 @@
             <div class="data-table-container">
                 <div class="table-header">
                     <h2>🏢 Data Gedung</h2>
-                    <button class="btn-add" onclick="alert('Fitur tambah gedung untuk Admin')" id="btnAddBuilding">➕ Tambah Gedung</button>
+                    <button class="btn-add" onclick="showAddBuildingModal()" id="btnAddBuilding">➕ Tambah Gedung</button>
                 </div>
                 <table>
                     <thead>
@@ -537,7 +538,7 @@
             <div class="data-table-container">
                 <div class="table-header">
                     <h2>👥 Data User</h2>
-                    <button class="btn-add" onclick="alert('Fitur tambah user')">➕ Tambah User</button>
+                    <button class="btn-add" onclick="addUser()">➕ Tambah User</button>
                 </div>
                 <table>
                     <thead>
@@ -558,7 +559,7 @@
             <div class="data-table-container">
                 <div class="table-header">
                     <h2>🔬 Data Laboratorium</h2>
-                    <button class="btn-add" onclick="alert('Fitur tambah lab untuk Admin')" id="btnAddLab">➕ Tambah Lab</button>
+                    <button class="btn-add" onclick="addLab()" id="btnAddLab">➕ Tambah Lab</button>
                 </div>
                 <table>
                     <thead>
@@ -594,27 +595,8 @@
                         "UIM_1": "Gedung A (UIM 001)", 
                         "lantai": "1 & 2",
                         "lantai_detail": {
-                            "Lantai 1": [
-                                "PUSKOM",
-                                "FAKULTAS HUKUM",
-                                "FAKULTAS AGAMA",
-                                "BAAK",
-                                "BAUK",
-                                "RUANG REKTOR",
-                                "RUANG REKTORAT",
-                                "Gedung A Ruang A1.9 kelas Akuntansi",
-                                "FAKULTAS EKONOMI",
-                                "Gedung A Ruang A1.11 kelas Akuntansi",
-                                "Ruang Layanan Kesehatan",
-                                "Laboratorium kebidanan"
-                            ],
-                            "Lantai 2": [
-                                "Gedung A Ruang A2.6 Kelas Bahasa Inggris",
-                                "RUANG UPT HUMAS DAN PMB",
-                                "FAKULTAS PERTANIAN",
-                                "Gedung A Ruang A2.2 FAK. KIP",
-                                "Gedung A Ruang A2.1 Kelas Fisika"
-                            ]
+                            "Lantai 1": ["PUSKOM", "FAKULTAS HUKUM", "FAKULTAS AGAMA", "BAAK", "BAUK", "RUANG REKTOR", "RUANG REKTORAT", "Gedung A Ruang A1.9 kelas Akuntansi", "FAKULTAS EKONOMI", "Gedung A Ruang A1.11 kelas Akuntansi", "Ruang Layanan Kesehatan", "Laboratorium kebidanan"],
+                            "Lantai 2": ["Gedung A Ruang A2.6 Kelas Bahasa Inggris", "RUANG UPT HUMAS DAN PMB", "FAKULTAS PERTANIAN", "Gedung A Ruang A2.2 FAK. KIP", "Gedung A Ruang A2.1 Kelas Fisika"]
                         },
                         kategori: "gedung_a" 
                     }, 
@@ -626,9 +608,7 @@
                         "UIM_1": "Musholla Al-Muttaqin (UIM 002)", 
                         "lantai": "1",
                         "lantai_detail": {
-                            "Lantai 1": [
-                                "Fasilitas ibadah untuk civitas akademika UIM"
-                            ]
+                            "Lantai 1": ["Fasilitas ibadah untuk civitas akademika UIM"]
                         },
                         kategori: "musholla" 
                     }, 
@@ -640,35 +620,9 @@
                         "UIM_1": "Gedung B (UIM 003)", 
                         "lantai": "1, 2 & 3",
                         "lantai_detail": {
-                            "Lantai 1": [
-                                "Ruang Perpustakaan",
-                                "Ruang Fak MIPA",
-                                "Lab Komputer",
-                                "Gedung B Ruang B1.4 Fak. Teknik",
-                                "Smart Class",
-                                "LPMI dan LPI",
-                                "Ruang Fak. Kesehatan"
-                            ],
-                            "Lantai 2": [
-                                "Laboratorium Kimia Farmasi",
-                                "Laboratorium bahan Alam",
-                                "Lab Teknologi Farmasi",
-                                "Gedung B Ruang B2.7 kelas PAI",
-                                "Gedung B Ruang B2.8 kelas PAI",
-                                "Gedung B Ruang B2.9 kelas PAI",
-                                "Gedung B Ruang B2.10 kelas TI",
-                                "Gedung B Ruang B2.11 kelas TI",
-                                "Gedung B Ruang B2.12 kelas SI"
-                            ],
-                            "Lantai 3": [
-                                "Gedung B Ruang B3.6 Kelas Matematika",
-                                "Gedung B Ruang B3.7 Kelas Matematika",
-                                "Gedung B Ruang B3.5 kelas Paud",
-                                "Gedung B Ruang B3.4 kelas Paud",
-                                "Gedung B Ruang B3.3 kelas HKI",
-                                "Gedung B Ruang B3.2 kelas HKI",
-                                "Aula Sirajuddin"
-                            ]
+                            "Lantai 1": ["Ruang Perpustakaan", "Ruang Fak MIPA", "Lab Komputer", "Gedung B Ruang B1.4 Fak. Teknik", "Smart Class", "LPMI dan LPI", "Ruang Fak. Kesehatan"],
+                            "Lantai 2": ["Laboratorium Kimia Farmasi", "Laboratorium bahan Alam", "Lab Teknologi Farmasi", "Gedung B Ruang B2.7 kelas PAI", "Gedung B Ruang B2.8 kelas PAI", "Gedung B Ruang B2.9 kelas PAI", "Gedung B Ruang B2.10 kelas TI", "Gedung B Ruang B2.11 kelas TI", "Gedung B Ruang B2.12 kelas SI"],
+                            "Lantai 3": ["Gedung B Ruang B3.6 Kelas Matematika", "Gedung B Ruang B3.7 Kelas Matematika", "Gedung B Ruang B3.5 kelas Paud", "Gedung B Ruang B3.4 kelas Paud", "Gedung B Ruang B3.3 kelas HKI", "Gedung B Ruang B3.2 kelas HKI", "Aula Sirajuddin"]
                         },
                         kategori: "gedung_b" 
                     }, 
@@ -680,26 +634,9 @@
                         "UIM_1": "Gedung C (UIM 004)", 
                         "lantai": "1, 2 & 3",
                         "lantai_detail": {
-                            "Lantai 1": [
-                                "Asrama putri",
-                                "Ruang Pusat Layanan Terpadu Program Pascasarjana",
-                                "Ruang Diskusi/ Peng Akademik",
-                                "Gedung C Ruang C1.2 Kelas Agribisnis",
-                                "Gedung C Ruang C1.3 Kelas MPI",
-                                "Gedung C Ruang C1.4 Kelas MPI"
-                            ],
-                            "Lantai 2": [
-                                "Gedung C Ruang C2.1 Kelas Hukum",
-                                "Gedung C Ruang C2.2 Kelas Hukum",
-                                "Gedung C Ruang C2.3 Kelas Agrobis Perikanan",
-                                "Gedung C Ruang C2.4 Kelas Agroteknologi"
-                            ],
-                            "Lantai 3": [
-                                "Gedung C Ruang C3.1 Kelas Farmasi",
-                                "Gedung C Ruang C3.2 Kelas Farmasi",
-                                "Gedung C Ruang C3.3 Kelas Farmasi",
-                                "Gedung C Ruang C3.4 Kelas Biologi"
-                            ]
+                            "Lantai 1": ["Asrama putri", "Ruang Pusat Layanan Terpadu Program Pascasarjana", "Ruang Diskusi/ Peng Akademik", "Gedung C Ruang C1.2 Kelas Agribisnis", "Gedung C Ruang C1.3 Kelas MPI", "Gedung C Ruang C1.4 Kelas MPI"],
+                            "Lantai 2": ["Gedung C Ruang C2.1 Kelas Hukum", "Gedung C Ruang C2.2 Kelas Hukum", "Gedung C Ruang C2.3 Kelas Agrobis Perikanan", "Gedung C Ruang C2.4 Kelas Agroteknologi"],
+                            "Lantai 3": ["Gedung C Ruang C3.1 Kelas Farmasi", "Gedung C Ruang C3.2 Kelas Farmasi", "Gedung C Ruang C3.3 Kelas Farmasi", "Gedung C Ruang C3.4 Kelas Biologi"]
                         },
                         kategori: "gedung_c" 
                     }, 
@@ -716,6 +653,7 @@
             ]
         };
         
+        // Data dummy untuk CRUD (Sisi Klien)
         var users = [
             { id: 1, username: "admin", password: "admin123", role: "admin", status: "Aktif" },
             { id: 2, username: "user", password: "user123", role: "user", status: "Aktif" },
@@ -729,6 +667,7 @@
             { id: 4, nama: "Lab Kebidanan", gedung: "Gedung A", lantai: 1, kapasitas: 25 }
         ];
         
+        // --- FUNGSI LOGIN & LOGOUT ---
         function handleLogin(e) {
             e.preventDefault();
             var username = document.getElementById('username').value;
@@ -747,11 +686,17 @@
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('mainApp').style.display = 'block';
                 
+                // Sembunyikan/Tampilkan tab dan tombol admin
                 if (role === 'user') {
-                    document.getElementById('tabUsers').style.display = 'none';
-                    document.getElementById('btnAddBuilding').style.display = 'none';
+                    document.getElementById('tabUsers').classList.add('hidden');
+                    document.getElementById('btnAddBuilding').classList.add('hidden');
                     var btnAddLab = document.getElementById('btnAddLab');
-                    if (btnAddLab) btnAddLab.style.display = 'none';
+                    if (btnAddLab) btnAddLab.classList.add('hidden');
+                } else {
+                    document.getElementById('tabUsers').classList.remove('hidden');
+                    document.getElementById('btnAddBuilding').classList.remove('hidden');
+                    var btnAddLab = document.getElementById('btnAddLab');
+                    if (btnAddLab) btnAddLab.classList.remove('hidden');
                 }
                 
                 setTimeout(function() {
@@ -771,6 +716,7 @@
             }
         }
         
+        // --- FUNGSI TABS & MAP ---
         function switchTab(tab) {
             var tabs = document.querySelectorAll('.nav-tab');
             var sections = document.querySelectorAll('.content-section');
@@ -778,17 +724,24 @@
             tabs.forEach(function(t) { t.classList.remove('active'); });
             sections.forEach(function(s) { s.classList.remove('active'); });
             
-            event.target.classList.add('active');
+            var clickedTab = document.querySelector('.nav-tab[onclick*="' + tab + '"]');
+            if(clickedTab) clickedTab.classList.add('active');
+            
             var sectionId = 'section' + tab.charAt(0).toUpperCase() + tab.slice(1);
-            document.getElementById(sectionId).classList.add('active');
+            var activeSection = document.getElementById(sectionId);
+            if(activeSection) activeSection.classList.add('active');
             
             if (tab === 'map' && map) {
                 setTimeout(function() { map.invalidateSize(); }, 100);
             }
+            
+            if (['buildings', 'users', 'labs'].includes(tab)) {
+                renderTables();
+            }
         }
         
         function initMap() {
-            console.log('🗺️ Initializing map with real coordinates...');
+            if (map) { map.remove(); map = null; }
             
             map = L.map('map', {
                 center: [-7.155188, 113.457997],
@@ -796,50 +749,28 @@
                 zoomControl: true
             });
             
-            var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            });
-            
-            var googleSat = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                attribution: '© Google'
-            });
+            var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' });
+            var googleSat = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', { maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'], attribution: '© Google' });
             
             googleSat.addTo(map);
             
-            var baseMaps = {
-                "Google Satellite": googleSat,
-                "OpenStreetMap": osmLayer
-            };
+            var baseMaps = { "Google Satellite": googleSat, "OpenStreetMap": osmLayer };
             L.control.layers(baseMaps).addTo(map);
             L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
             
-            console.log('✅ Map initialized');
-            
-            // Add campus boundary
             L.geoJSON(batasKampusData, {
-                style: {
-                    color: '#ffc107',
-                    weight: 4,
-                    fillColor: 'transparent',
-                    fillOpacity: 0,
-                    dashArray: '10, 5'
-                }
+                style: { color: '#ffc107', weight: 4, fillColor: 'transparent', fillOpacity: 0, dashArray: '10, 5' }
             }).addTo(map);
             
-            console.log('✅ Campus boundary added');
-            
+            // Reset building layers
+            buildingLayers = [];
+
             // Add buildings from real GeoJSON
             geojsonData.features.forEach(function(feature, index) {
                 var props = feature.properties;
                 var coords = feature.geometry.coordinates[0];
                 
-                // Convert coordinates to Leaflet format [lat, lng]
-                var latlngs = coords.map(function(coord) {
-                    return [coord[1], coord[0]];
-                });
+                var latlngs = coords.map(function(coord) { return [coord[1], coord[0]]; });
                 
                 var color = '#28a745';
                 if (props.kategori === 'musholla') color = '#17a2b8';
@@ -854,79 +785,56 @@
                     fillOpacity: 0.7
                 }).addTo(map);
                 
-                // Create popup content with summary
-                var summaryText = '';
                 var roomCount = 0;
-                
                 if (props.lantai_detail) {
                     for (var lantaiKey in props.lantai_detail) {
                         roomCount += props.lantai_detail[lantaiKey].length;
                     }
-                    summaryText = '<div class="detail-content"><strong>📝 Ringkasan:</strong><br>' +
-                                 'Total <strong>' + roomCount + '</strong> ruangan/fasilitas<br>' +
-                                 'Tersebar di <strong>' + Object.keys(props.lantai_detail).length + '</strong> lantai</div>';
-                } else {
-                    summaryText = '<div class="detail-content"><strong>📝 Detail:</strong><br>Lihat detail lengkap di modal</div>';
                 }
                 
-                var popupContent = '<div class="info-popup">' +
-                                  '<h4>' + props.UIM_1 + '</h4>' +
-                                  '<p><strong>🏗️ Lantai:</strong> ' + props.lantai + '</p>' +
-                                  summaryText +
-                                  '<button class="btn-detail" onclick="showDetailModal(' + index + ')">📋 Lihat Detail Lengkap</button>' +
-                                  '</div>';
+                var summaryText = '<div class="detail-content"><strong>📝 Ringkasan:</strong><br>' +
+                                    'Total <strong>' + roomCount + '</strong> ruangan/fasilitas<br>' +
+                                    'Tersebar di <strong>' + Object.keys(props.lantai_detail || {}).length + '</strong> lantai</div>';
                 
-                polygon.bindPopup(popupContent, {
-                    maxWidth: 350,
-                    maxHeight: 400
-                });
+                var popupContent = '<div class="info-popup">' +
+                                    '<h4>' + props.UIM_1 + '</h4>' +
+                                    '<p><strong>🏗️ Lantai:</strong> ' + props.lantai + '</p>' +
+                                    summaryText +
+                                    '<button class="btn-detail" onclick="showDetailModal(' + index + ')">📋 Lihat Detail Lengkap</button>' +
+                                    '</div>';
+                
+                polygon.bindPopup(popupContent, { maxWidth: 350, maxHeight: 400 });
                 polygon.bindTooltip(props.UIM_1, { permanent: false, direction: 'top' });
                 
-                polygon.on('mouseover', function() {
-                    this.setStyle({ 
-                        weight: 4, 
-                        fillOpacity: 0.9, 
-                        color: '#ff0000'
-                    });
-                    this.openTooltip();
-                });
-                
-                polygon.on('mouseout', function() {
-                    this.setStyle({ 
-                        weight: 2, 
-                        fillOpacity: 0.7, 
-                        color: '#155724'
-                    });
-                });
-                
-                polygon.on('click', function() {
-                    map.fitBounds(this.getBounds(), { padding: [50, 50] });
-                });
+                polygon.on('mouseover', function() { this.setStyle({ weight: 4, fillOpacity: 0.9, color: '#ff0000' }); this.openTooltip(); });
+                polygon.on('mouseout', function() { this.setStyle({ weight: 2, fillOpacity: 0.7, color: '#155724' }); });
+                polygon.on('click', function() { map.fitBounds(this.getBounds(), { padding: [50, 50] }); });
                 
                 buildingLayers.push({ 
                     id: index + 1,
                     name: props.UIM_1,
                     layer: polygon, 
                     kategori: props.kategori,
-                    properties: props
+                    properties: props,
+                    geojsonIndex: index // Simpan index asli di geojsonData.features
                 });
             });
             
-            console.log('✅ ' + buildingLayers.length + ' buildings added from GeoJSON');
-            
-            // Fit map to show all features
             setTimeout(function() {
-                var group = new L.featureGroup(buildingLayers.map(function(b) { return b.layer; }));
-                map.fitBounds(group.getBounds(), { padding: [50, 50] });
+                if (buildingLayers.length > 0) {
+                    var group = new L.featureGroup(buildingLayers.map(function(b) { return b.layer; }));
+                    map.fitBounds(group.getBounds(), { padding: [50, 50] });
+                }
             }, 500);
         }
         
+        // --- FUNGSI SIDEBAR & MODAL ---
         function updateBuildingList() {
             var list = document.getElementById('buildingList');
             list.innerHTML = buildingLayers.map(function(b) {
                 return '<li class="building-item" data-kategori="' + b.kategori + '" data-id="' + b.id + '" onclick="zoomToBuilding(' + b.id + ')">' +
-                       '<strong>' + b.name + '</strong>' +
-                       '<small>🏗️ ' + b.properties.lantai + ' Lantai</small></li>';
+                        '<strong>' + b.name + '</strong>' +
+                        '<small>🏗️ ' + b.properties.lantai + ' Lantai</small></li>';
             }).join('');
             
             document.getElementById('totalBuildings').textContent = buildingLayers.length;
@@ -966,7 +874,7 @@
         }
         
         function showDetailModal(index) {
-            var building = buildingLayers[index];
+            var building = buildingLayers.find(b => b.geojsonIndex === index);
             if (!building) return;
             
             var props = building.properties;
@@ -984,7 +892,7 @@
             // Display detailed room information per floor
             if (props.lantai_detail) {
                 detailHTML += '<div class="info-row">' +
-                             '<strong>📝 Detail Ruangan:</strong><br><br>';
+                                '<strong>📝 Detail Ruangan:</strong><br><br>';
                 
                 for (var lantaiKey in props.lantai_detail) {
                     detailHTML += '<div style="margin-bottom: 15px;">';
@@ -1002,9 +910,9 @@
             }
             
             detailHTML += '<div class="info-row">' +
-                         '<strong>📍 Kategori:</strong>' +
-                         '<span>' + props.kategori.replace('_', ' ').toUpperCase() + '</span>' +
-                         '</div>';
+                            '<strong>📍 Kategori:</strong>' +
+                            '<span>' + props.kategori.replace('_', ' ').toUpperCase() + '</span>' +
+                            '</div>';
             
             modalBody.innerHTML = detailHTML;
             modal.classList.add('active');
@@ -1014,49 +922,222 @@
             document.getElementById('detailModal').classList.remove('active');
         }
         
-        // Close modal when clicking outside
         document.getElementById('detailModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
+
+        // --- FUNGSI CRUD USER ---
+        function addUser() {
+            var newUsername = prompt("Masukkan Username Baru:");
+            if (!newUsername) return;
+            var newPassword = prompt("Masukkan Password untuk " + newUsername + ":");
+            if (!newPassword) return;
+            var newRole = prompt("Masukkan Role (admin/user) untuk " + newUsername + ":").toLowerCase();
+            if (newRole !== 'admin' && newRole !== 'user') {
+                alert("Role tidak valid. Harus 'admin' atau 'user'.");
+                return;
+            }
+
+            var newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+            users.push({ id: newId, username: newUsername, password: newPassword, role: newRole, status: "Aktif" });
+            alert("✅ User " + newUsername + " berhasil ditambahkan.");
+            renderTables();
+        }
+
+        function editUser(id) {
+            var user = users.find(u => u.id === id);
+            if (!user) return;
+            
+            var newUsername = prompt("Edit Username (" + user.username + "):", user.username);
+            if (!newUsername) return;
+
+            var newPassword = prompt("Edit Password (kosongkan jika tidak diubah):");
+            var newRole = prompt("Edit Role (" + user.role + "):", user.role).toLowerCase();
+            if (newRole !== 'admin' && newRole !== 'user') {
+                alert("Role tidak valid. Harus 'admin' atau 'user'.");
+                return;
+            }
+            
+            // Pencegahan: Admin tidak bisa mengubah role dirinya sendiri
+            if (user.username === currentUser && user.role !== newRole) {
+                alert("❌ Anda tidak bisa mengubah role akun yang sedang Anda gunakan saat ini.");
+                return;
+            }
+
+            user.username = newUsername;
+            if (newPassword) user.password = newPassword;
+            user.role = newRole;
+            
+            alert("✅ User " + user.username + " berhasil diupdate.");
+            renderTables();
+        }
+
+        function deleteUser(id) {
+            var user = users.find(u => u.id === id);
+            if (user.username === currentUser) {
+                alert("❌ Anda tidak bisa menghapus akun yang sedang Anda gunakan saat ini.");
+                return;
+            }
+            
+            if (confirm('Yakin ingin menghapus user ' + user.username + '? Tindakan ini tidak dapat dibatalkan.')) {
+                var initialLength = users.length;
+                users = users.filter(u => u.id !== id);
+                if (users.length < initialLength) {
+                    alert("🗑️ User berhasil dihapus.");
+                    renderTables();
+                } else {
+                    alert("❌ Gagal menghapus user.");
+                }
+            }
+        }
+
+        // --- FUNGSI CRUD LAB ---
+        function addLab() {
+            var newNama = prompt("Masukkan Nama Lab Baru:");
+            if (!newNama) return;
+            var newGedung = prompt("Masukkan Nama Gedung (contoh: Gedung A):");
+            if (!newGedung) return;
+            var newLantai = parseInt(prompt("Masukkan Lantai (angka):"));
+            if (isNaN(newLantai) || newLantai < 1) {
+                alert("Lantai harus berupa angka positif.");
+                return;
+            }
+            var newKapasitas = parseInt(prompt("Masukkan Kapasitas (angka):"));
+            if (isNaN(newKapasitas) || newKapasitas < 1) {
+                alert("Kapasitas harus berupa angka positif.");
+                return;
+            }
+
+            var newId = labs.length > 0 ? Math.max(...labs.map(l => l.id)) + 1 : 1;
+            labs.push({ id: newId, nama: newNama, gedung: newGedung, lantai: newLantai, kapasitas: newKapasitas });
+            alert("✅ Lab " + newNama + " berhasil ditambahkan.");
+            renderTables();
+        }
+
+        function editLab(id) {
+            var lab = labs.find(l => l.id === id);
+            if (!lab) return;
+
+            var newNama = prompt("Edit Nama Lab (" + lab.nama + "):", lab.nama);
+            if (!newNama) return;
+            var newGedung = prompt("Edit Gedung (" + lab.gedung + "):", lab.gedung);
+            if (!newGedung) return;
+            
+            var newLantai = prompt("Edit Lantai (" + lab.lantai + "):", lab.lantai);
+            if (!newLantai || isNaN(parseInt(newLantai)) || parseInt(newLantai) < 1) {
+                alert("Lantai harus berupa angka positif.");
+                return;
+            }
+
+            var newKapasitas = prompt("Edit Kapasitas (" + lab.kapasitas + "):", lab.kapasitas);
+            if (!newKapasitas || isNaN(parseInt(newKapasitas)) || parseInt(newKapasitas) < 1) {
+                alert("Kapasitas harus berupa angka positif.");
+                return;
+            }
+
+            lab.nama = newNama;
+            lab.gedung = newGedung;
+            lab.lantai = parseInt(newLantai);
+            lab.kapasitas = parseInt(newKapasitas);
+
+            alert("✅ Lab " + lab.nama + " berhasil diupdate.");
+            renderTables();
+        }
+
+        function deleteLab(id) {
+            var lab = labs.find(l => l.id === id);
+            if (confirm('Yakin ingin menghapus data Lab ' + lab.nama + '? Tindakan ini tidak dapat dibatalkan.')) {
+                var initialLength = labs.length;
+                labs = labs.filter(l => l.id !== id);
+                if (labs.length < initialLength) {
+                    alert("🗑️ Lab berhasil dihapus.");
+                    renderTables();
+                } else {
+                    alert("❌ Gagal menghapus Lab.");
+                }
+            }
+        }
+
+        // --- FUNGSI DATA BANGUNAN (SIMULASI CRUD) ---
+
+        function showAddBuildingModal() {
+            var modal = document.getElementById('detailModal');
+            var modalTitle = document.getElementById('modalTitle');
+            var modalBody = document.getElementById('modalBody');
+
+            modalTitle.textContent = "➕ Tambah Data Bangunan Baru";
+            
+            var formHtml = '<form id="addBuildingForm" onsubmit="return handleAddBuilding(event)">' +
+                            '<div class="form-group"><label>Nama Gedung (UIM XXX)</label><input type="text" id="addName" required></div>' +
+                            '<div class="form-group"><label>Jumlah Lantai (ex: 1 & 2)</label><input type="text" id="addLantai" required></div>' +
+                            '<div class="form-group"><label>Kategori (ex: gedung_a, musholla)</label><input type="text" id="addKategori" required></div>' +
+                            '<div class="info-row"><strong>GeoJSON Coordinates:</strong><br><span style="color:#dc3545; font-size: 11px;">*Membutuhkan input GeoJSON Polygon/Multiple Coordinates. Ini hanya simulasi form input.</span><textarea id="addCoords" required rows="5" placeholder="Masukkan GeoJSON Polygon Coordinates (Lat/Lng)"></textarea></div>' +
+                            '<button type="submit" class="btn">Simpan Data Bangunan</button>' +
+                            '</form>';
+            
+            modalBody.innerHTML = formHtml;
+            modal.classList.add('active');
+        }
         
+        function handleAddBuilding(e) {
+            e.preventDefault();
+            var name = document.getElementById('addName').value;
+            // Simulasi berhasil disimpan
+            alert("✅ Data Bangunan " + name + " berhasil ditambahkan (Simulasi).");
+            closeModal();
+        }
+        
+        // --- FUNGSI RENDER UTAMA ---
         function renderTables() {
             var buildingsTable = document.getElementById('buildingsTable');
             buildingsTable.innerHTML = buildingLayers.map(function(b, i) {
-                // Create summary of rooms
-                var roomSummary = '';
+                var totalRooms = 0;
                 if (b.properties.lantai_detail) {
-                    var totalRooms = 0;
                     for (var lantai in b.properties.lantai_detail) {
                         totalRooms += b.properties.lantai_detail[lantai].length;
                     }
-                    roomSummary = totalRooms + ' ruangan/fasilitas';
                 }
+                var roomSummary = totalRooms + ' ruangan/fasilitas';
                 
-                return '<tr><td>' + (i + 1) + '</td><td>' + b.name + '</td><td>' + b.properties.lantai + '</td><td style="font-size: 11px;">' + roomSummary + '</td><td>' +
-                       (currentRole === 'admin' ? 
-                       '<button class="action-btn btn-edit" onclick="alert(\'Edit: ' + b.name + '\')">✏️ Edit</button>' +
-                       '<button class="action-btn btn-delete" onclick="alert(\'Hapus: ' + b.name + '\')">🗑️ Hapus</button>' : 
-                       '<span style="color:#999;">View Only</span>') + '</td></tr>';
+                var actionButtons = (currentRole === 'admin' ? 
+                    '<button class="action-btn btn-edit" onclick="showDetailModal(' + b.geojsonIndex + ')">🔍 Detail/Edit</button>' +
+                    '<button class="action-btn btn-delete" onclick="alert(\'Hapus: ' + b.name + '. Fitur ini memerlukan implementasi GeoJSON yang kompleks.\')">🗑️ Hapus</button>' : 
+                    '<button class="action-btn btn-edit" onclick="showDetailModal(' + b.geojsonIndex + ')">🔍 Detail</button>');
+
+                return '<tr><td>' + (i + 1) + '</td><td>' + b.name + '</td><td>' + b.properties.lantai + '</td><td style="font-size: 11px;">' + roomSummary + '</td><td>' + actionButtons + '</td></tr>';
             }).join('');
             
             var usersTable = document.getElementById('usersTable');
             usersTable.innerHTML = users.map(function(u, i) {
+                var isCurrentUser = u.username === currentUser;
+                var buttons = '';
+                
+                if (currentRole === 'admin') {
+                    buttons += '<button class="action-btn btn-edit" onclick="editUser(' + u.id + ')">✏️ Edit</button>';
+                    if (isCurrentUser) {
+                        buttons += '<span style="color:#dc3545; font-size: 10px; margin-left: 5px;">(Sedang Login)</span>';
+                    } else {
+                        buttons += '<button class="action-btn btn-delete" onclick="deleteUser(' + u.id + ')">🗑️ Hapus</button>';
+                    }
+                } else {
+                    buttons = '<span style="color:#999;">View Only</span>';
+                }
+
                 return '<tr><td>' + (i + 1) + '</td><td>' + u.username + '</td><td>' + 
-                       '<span style="padding: 5px 10px; background: ' + (u.role === 'admin' ? '#28a745' : '#007bff') + '; color: white; border-radius: 3px;">' + u.role + '</span>' +
-                       '</td><td>' + u.status + '</td><td>' +
-                       '<button class="action-btn btn-edit" onclick="alert(\'Edit: ' + u.username + '\')">✏️ Edit</button>' +
-                       '<button class="action-btn btn-delete" onclick="alert(\'Hapus: ' + u.username + '\')">🗑️ Hapus</button></td></tr>';
+                        '<span style="padding: 5px 10px; background: ' + (u.role === 'admin' ? '#28a745' : '#007bff') + '; color: white; border-radius: 3px; font-size: 12px;">' + u.role.toUpperCase() + '</span>' +
+                        '</td><td>' + u.status + '</td><td>' + buttons + '</td></tr>';
             }).join('');
             
             var labsTable = document.getElementById('labsTable');
             labsTable.innerHTML = labs.map(function(l, i) {
-                return '<tr><td>' + (i + 1) + '</td><td>' + l.nama + '</td><td>' + l.gedung + '</td><td>' + l.lantai + '</td><td>' + l.kapasitas + ' orang</td><td>' +
-                       (currentRole === 'admin' ? 
-                       '<button class="action-btn btn-edit" onclick="alert(\'Edit: ' + l.nama + '\')">✏️ Edit</button>' +
-                       '<button class="action-btn btn-delete" onclick="alert(\'Hapus: ' + l.nama + '\')">🗑️ Hapus</button>' :
-                       '<span style="color:#999;">View Only</span>') + '</td></tr>';
+                var actionButtons = (currentRole === 'admin' ? 
+                    '<button class="action-btn btn-edit" onclick="editLab(' + l.id + ')">✏️ Edit</button>' +
+                    '<button class="action-btn btn-delete" onclick="deleteLab(' + l.id + ')">🗑️ Hapus</button>' :
+                    '<span style="color:#999;">View Only</span>');
+
+                return '<tr><td>' + (i + 1) + '</td><td>' + l.nama + '</td><td>' + l.gedung + '</td><td>' + l.lantai + '</td><td>' + l.kapasitas + ' orang</td><td>' + actionButtons + '</td></tr>';
             }).join('');
         }
     </script>
